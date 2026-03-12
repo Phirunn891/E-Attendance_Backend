@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= title
+  p Upload an Excel file (.xlsx) containing student data.
+  p.text-muted Expected columns: <b>Name KH</b>, <b>Name Eng</b>, <b>Gender</b>, <b>Class</b> (optional)
+  p.text-info Note: Duplicate names will be automatically skipped to prevent multiple entries for the same student.
+
+  form(action='/student/import', method='post', enctype='multipart/form-data')
+    div
+      input(type='file', name='file', accept='.xlsx, .xls, .csv')
+    div
+      button(type='submit') Import Students

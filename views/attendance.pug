@@ -1,0 +1,53 @@
+extends layout
+
+block content
+  h1= title
+  
+  form(action='/attendance/save', method='post')
+    div.form-group
+      label(for='att_date') Date:
+      input(type='date', name='att_date', required=true, value=new Date().toISOString().slice(0,10))
+    
+    div.form-group
+      label(for='subject_id') Subject:
+      select(name='subject_id', required=true)
+        option(value='') Select Subject
+        each subject in subjects
+          option(value=subject.subject_id)= subject.subject_name
+
+    div.form-group
+      label(for='teacher_id') Teacher:
+      select(name='teacher_id', required=true)
+        option(value='') Select Teacher
+        each teacher in teachers
+          option(value=teacher.teacher_id)= teacher.teachername_kh
+
+    h2 Student List
+    table
+      thead
+        tr
+          th ID
+          th Name (KH)
+          th Name (Eng)
+          th Gender
+          th Status
+      tbody
+        each student in students
+          tr
+            td= student.student_id
+            td= student.studentname_kh
+            td= student.studentname_eng
+            td= student.gender
+            td
+              label
+                input(type='radio', name=`attendance[${student.student_id}]`, value='1', checked=true) 
+                | Present
+              label
+                input(type='radio', name=`attendance[${student.student_id}]`, value='2') 
+                | Absent
+              label
+                input(type='radio', name=`attendance[${student.student_id}]`, value='3') 
+                | Permission
+
+    div
+      button(type='submit') Save Attendance
