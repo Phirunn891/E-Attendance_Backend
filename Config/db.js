@@ -1,20 +1,23 @@
 const { Sequelize } = require("sequelize");
+
 const sequelize = new Sequelize(
-    "db_attendance",   // DB name
-    "root",         // DB user
-    "",             // DB password
-    {
-        host: "localhost",
-        dialect: "mysql",
-        logging: false
-    }
+  "E_Attendance", // Database name
+  "root",         // Username
+  "AqiqNpNYyDShwnynbtrfIPSkYvWZTwuC", // Password
+  {
+    host: "yamabiko.proxy.rlwy.net",
+    port: 26983, // IMPORTANT: Railway port
+    dialect: "mysql",
+    logging: false
+  }
 );
 
 // TEST connection
-if (process.env.NODE_ENV !== 'test') {
-    sequelize.authenticate()
-      .then(() => console.log("Sequelize connected.."))
-      .catch(err => console.log("DB Error: ", err));
+if (process.env.NODE_ENV !== "test") {
+  sequelize
+    .authenticate()
+    .then(() => console.log("✅ Sequelize connected.."))
+    .catch(err => console.log("❌ DB Error:", err));
 }
 
 module.exports = sequelize;

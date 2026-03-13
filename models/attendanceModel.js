@@ -17,14 +17,14 @@ const Attendance = sequelize.define("Attendance",{
     subject_id: {
         type: DataTypes.INTEGER,
         references : {
-            model: "subjects",
+            model: "Subjects",
             key: "subject_id"
         }
     },
     teacher_id : {
         type : DataTypes.INTEGER,
         references: {
-            model: "teachers",
+            model: "Teachers",
             key:"teacher_id"
         }
     },
