@@ -68,7 +68,7 @@ exports.getAttendanceSummary = async (req, res) => {
                 COUNT(CASE WHEN a.status = 1 THEN 1 END) as totalPresent,
                 COUNT(CASE WHEN a.status = 0 THEN 1 END) as totalAbsent
             FROM students s
-            LEFT JOIN classes c ON s.class_id = c.class_id
+            LEFT JOIN Classes c ON s.class_id = c.class_id
             LEFT JOIN attendances a ON s.student_id = a.student_id
             GROUP BY s.student_id, c.class_name
         `, { type: QueryTypes.SELECT });
