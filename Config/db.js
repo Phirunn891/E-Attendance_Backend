@@ -8,7 +8,7 @@ const sequelize = new Sequelize(
     host: "yamabiko.proxy.rlwy.net",
     port: 26983, // IMPORTANT: Railway port
     dialect: "mysql",
-    logging: false
+    logging: console.log // Enable SQL logging
   }
 );
 
@@ -16,8 +16,11 @@ const sequelize = new Sequelize(
 if (process.env.NODE_ENV !== "test") {
   sequelize
     .authenticate()
-    .then(() => console.log("✅ Sequelize connected.."))
-    .catch(err => console.log("❌ DB Error:", err));
+    .then(() => console.log("✅ Sequelize connected to database."))
+    .catch(err => {
+      console.error("❌ DB Connection Error details:", err.message);
+      console.error("❌ SQL Query failed or connection timed out.");
+    });
 }
 
 module.exports = sequelize;
